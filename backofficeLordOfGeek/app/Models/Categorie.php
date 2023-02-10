@@ -9,7 +9,12 @@ class Categorie extends Model
 {
     use HasFactory;
     protected $table = "categories";
-    protected $primaryKey ="id";
+    protected $primaryKey = "id";
     protected $fillable = array('nom_cat');
     public $timestamps = false;
-}
+
+    public function jeux()
+    {
+        return $this->hasMany(Jeu::class);
+    }
+};

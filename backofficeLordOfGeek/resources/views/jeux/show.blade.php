@@ -10,6 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h2 class="text-2xl font-bold">{{$jeu->titre}}</h2>
+                    <p>{{$categorie->nom_cat}}</p>
                     <br>
                     <div class="flex justify-end">
                         <x-buttons.modify :route="route('jeux.edit',$jeu->id)" />

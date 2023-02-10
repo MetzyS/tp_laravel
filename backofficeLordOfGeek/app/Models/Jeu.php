@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jeu extends Model
 {
-use HasFactory;
-protected $table = "jeux";
-protected $primaryKey ="id";
-protected $fillable = array('titre');
-protected $fillable_desc = array('desc');
-public $timestamps = false;
+    use HasFactory;
+    protected $table = "jeux";
+    protected $primaryKey = "id";
+    protected $fillable = array('titre');
+    protected $fillable_desc = array('desc');
+    public $timestamps = false;
+
+
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 };

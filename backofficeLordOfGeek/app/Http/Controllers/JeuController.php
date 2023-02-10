@@ -14,7 +14,7 @@ class JeuController extends Controller
      */
     public function index()
     {
-        $jeux = Jeu::all();
+        $jeux = Jeu::orderBy('id', 'asc')->get();
         return view('jeux.index', ['jeux' => $jeux]);
     }
 
@@ -26,7 +26,7 @@ class JeuController extends Controller
      */
     public function create()
     {
-        return view('jeux.create', ['message' => "message d'erreur"]);
+        // 
     }
 
     /**
@@ -37,7 +37,15 @@ class JeuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->validate([
+            'titre' => 'required|string|max:45',
+            // un champ => une règle
+        ])) {
+            $titre = $request->input('titre');
+            // puis écriture en BDD
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -49,9 +57,11 @@ class JeuController extends Controller
     public function show($id)
     {
         $jeu = Jeu::find($id);
+        $categorie = $jeu->categorie;
         return view('jeux.show', [
             'id_jeu' => $id,
-            'jeu' => $jeu
+            'jeu' => $jeu,
+            'categorie' => $categorie
         ]);
     }
 

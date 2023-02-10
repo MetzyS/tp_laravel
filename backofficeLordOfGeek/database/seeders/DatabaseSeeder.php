@@ -19,10 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    Jeu::factory(10)->create();
-    User::factory(10)->create();
-    Categorie::factory(10)->create();
-    Tag::factory(50)->create();
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com', //password will be password
+        ]);
+        Categorie::factory(10)->create();
+        Jeu::factory(10)->create();
+        User::factory(10)->create();
+        Tag::factory(50)->create();
     }
-    
 }
