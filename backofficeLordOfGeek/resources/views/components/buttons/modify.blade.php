@@ -1,0 +1,1 @@
+<a href="{{$route}}" class="text-white bg-blue-600 font-bold px-2 py-2 rounded-md text-xs">Modifier</a>

@@ -1,7 +1,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Liste de tous les jeux') }}
+                {{ __('Liste de toutes les catégories') }}
             </h2>
         </x-slot>
 
@@ -14,18 +14,18 @@
                                 <tr class="bg-slate-200 text-slate-600 box-border border">
                                     <th class="text-left px-5 py-3">ID</th>
                                     <th class="text-left px-5 py-3">TITRE</th>
-                                    <th class="text-left px-5 py-3 flex items-center justify-between"><span>ACTIONS</span><x-buttons.create :route="route('jeux.create')" /></th>
+                                    <th class="text-left px-5 py-3 flex items-center justify-between"><span>ACTIONS</span><x-buttons.create :route="route('categories.create')" /></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($jeux as $jeu)
+                                @foreach ($categories as $categorie)
                                 <tr class=" border box-border">
-                                    <td class="text-center px-5 py-5">{{$jeu->id}}</td>
-                                    <td class="text-left px-5 py-5"><a href="{{route('jeux.show', $jeu->id)}}">{{$jeu->titre}}</a></td>
+                                    <td class="text-center px-5 py-5">{{$categorie->id}}</td>
+                                    <td class="text-left px-5 py-5"><a href="{{route('categories.show', $categorie->id)}}">{{$categorie->nom_cat}}</a></td>
                                     <td class="px-5 py-5 inline-flex">
-                                        <x-buttons.modify :route="route('jeux.edit',$jeu->id)" />
-                                        <x-buttons.see :route="route('jeux.show',$jeu->id)" />
-                                        <x-buttons.delete :action="route('jeux.destroy',$jeu->id)" />
+                                        <x-buttons.modify :route="route('categories.edit',$categorie->id)" />
+                                        <x-buttons.see :route="route('categories.show',$categorie->id)" />
+                                        <x-buttons.delete :action="route('categories.destroy',$categorie->id)" />
                                     </td>
                                 </tr>
                                 @endforeach

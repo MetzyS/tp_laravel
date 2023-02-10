@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
-use App\Models\Jeu;
 
-class JeuController extends Controller
+class CategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,9 @@ class JeuController extends Controller
      */
     public function index()
     {
-        $jeux = Jeu::all();
-        return view('jeux.index', ['jeux' => $jeux]);
+        $categories = Categorie::all();
+        return view('categories.index', ['categories' => $categories]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +25,7 @@ class JeuController extends Controller
      */
     public function create()
     {
-        return view('jeux.create', ['message' => "message d'erreur"]);
+        return view('categories.create', ['message' => "message d'erreur"]);
     }
 
     /**
@@ -48,14 +47,12 @@ class JeuController extends Controller
      */
     public function show($id)
     {
-        $jeu = Jeu::find($id);
-        return view('jeux.show', [
-            'id_jeu' => $id,
-            'jeu' => $jeu
+        $categorie = Categorie::find($id);
+        return view('categories.show', [
+            'id_categorie' => $id,
+            'categorie' => $categorie
         ]);
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -65,10 +62,10 @@ class JeuController extends Controller
      */
     public function edit($id)
     {
-        $jeu = Jeu::find($id);
-        return view('jeux.edit', [
-            'id_jeu' => $id,
-            'jeu' => $jeu
+        $categorie = Categorie::find($id);
+        return view('categories.edit', [
+            'id_categorie' => $id,
+            'categorie' => $categorie
         ]);
     }
 
@@ -82,13 +79,13 @@ class JeuController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => 'required|string|max:45'
+            'nom_cat' => 'required|string|max:45'
         ])) {
-            $titre = $request->input('titre');
-            $jeu = Jeu::find($id);
-            $jeu->titre = $titre;
-            $jeu->save();
-            return redirect()->route('jeux.index');
+            $nom_cat = $request->input('nom_cat');
+            $categorie = Categorie::find($id);
+            $categorie->nom_cat = $nom_cat;
+            $categorie->save();
+            return redirect()->route('categories.index');
         } else {
             return redirect()->back();
         }
@@ -102,7 +99,7 @@ class JeuController extends Controller
      */
     public function destroy($id)
     {
-        Jeu::destroy($id);
-        return redirect()->route('jeux.index');
+        Categorie::destroy($id);
+        return redirect()->route('categories.index');
     }
 }

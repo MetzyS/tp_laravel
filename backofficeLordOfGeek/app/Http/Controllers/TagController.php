@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Models\Jeu;
 
-class JeuController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class JeuController extends Controller
      */
     public function index()
     {
-        $jeux = Jeu::all();
-        return view('jeux.index', ['jeux' => $jeux]);
+        $tags = Tag::all();
+        return view('tags.index', ['tags' => $tags]);
     }
 
 
@@ -26,7 +26,7 @@ class JeuController extends Controller
      */
     public function create()
     {
-        return view('jeux.create', ['message' => "message d'erreur"]);
+        return view('tags.create', ['message' => "message d'erreur"]);
     }
 
     /**
@@ -48,10 +48,10 @@ class JeuController extends Controller
      */
     public function show($id)
     {
-        $jeu = Jeu::find($id);
-        return view('jeux.show', [
-            'id_jeu' => $id,
-            'jeu' => $jeu
+        $tag = Tag::find($id);
+        return view('tags.show', [
+            'id_tag' => $id,
+            'tag' => $tag
         ]);
     }
 
@@ -65,10 +65,10 @@ class JeuController extends Controller
      */
     public function edit($id)
     {
-        $jeu = Jeu::find($id);
-        return view('jeux.edit', [
-            'id_jeu' => $id,
-            'jeu' => $jeu
+        $tag = Tag::find($id);
+        return view('tags.edit', [
+            'id_tag' => $id,
+            'tag' => $tag
         ]);
     }
 
@@ -82,13 +82,13 @@ class JeuController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->validate([
-            'titre' => 'required|string|max:45'
+            'nom_tag' => 'required|string|max:45'
         ])) {
-            $titre = $request->input('titre');
-            $jeu = Jeu::find($id);
-            $jeu->titre = $titre;
-            $jeu->save();
-            return redirect()->route('jeux.index');
+            $nom_tag = $request->input('nom_tag');
+            $tag = Tag::find($id);
+            $tag->nom_tag = $nom_tag;
+            $tag->save();
+            return redirect()->route('tags.index');
         } else {
             return redirect()->back();
         }
@@ -102,7 +102,7 @@ class JeuController extends Controller
      */
     public function destroy($id)
     {
-        Jeu::destroy($id);
-        return redirect()->route('jeux.index');
+        Tag::destroy($id);
+        return redirect()->route('tags.index');
     }
 }

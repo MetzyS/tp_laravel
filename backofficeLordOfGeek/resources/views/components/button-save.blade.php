@@ -1,1 +1,0 @@
-<button class="text-white bg-blue-600 font-bold px-2 py-2 rounded-md text-xs my-5">Sauvegarder</button>
