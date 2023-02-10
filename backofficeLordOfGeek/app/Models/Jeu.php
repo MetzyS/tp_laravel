@@ -11,5 +11,6 @@ use HasFactory;
 protected $table = "jeux";
 protected $primaryKey ="id";
 protected $fillable = array('titre');
+protected $fillable_desc = array('desc');
 public $timestamps = false;
-}
+};
