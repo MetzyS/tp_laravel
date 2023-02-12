@@ -1,0 +1,1 @@
+<button type="submit" class="mx-5 bg-blue-600 p-2 rounded text-white">Ajouter</button>

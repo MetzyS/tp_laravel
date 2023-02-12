@@ -29,7 +29,7 @@
                         <x-buttons.save /><x-buttons.cancel />
                     </form>
 
-                    <form action="">
+                    <form action="{{route('jeux.attach', $jeu->id)}}" method="POST">
                         <div>
                             <legend class="text-slate-800 font-bold my-5">Liste des tags:</legend>
                             <ul class="my-5">
@@ -38,7 +38,7 @@
                                 @endforeach
                             </ul>
                             <label for="tags" class="text-slate-800 font-bold my-5">Nouveau Tag:</label>
-                            <input type="text" name="tags" id="tags"><button class="mx-5 bg-blue-600 p-2 rounded text-white">Ajouter</button>
+                            <input type="text" name="tags" id="tags"><x-buttons.add />
                         </div>
                     </form>
                 </div>

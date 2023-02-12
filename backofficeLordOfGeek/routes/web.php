@@ -34,4 +34,6 @@ Route::resource('jeux', JeuController::class);
 Route::resource('categories', CategorieController::class);
 Route::resource('tags', TagController::class);
 
+Route::post('jeux/{id}/attach', [JeuController::class, 'attach'])->name('jeux.attach'); // permet d'ajouter des tags a un jeu
+
 require __DIR__ . '/auth.php';

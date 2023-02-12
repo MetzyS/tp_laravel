@@ -113,6 +113,17 @@ class JeuController extends Controller
         }
     }
 
+    public function attach(Request $request, $id_jeu)
+    {
+        $new_tag = $request->input('tag');
+        $tag = Tag::firstOrCreate([
+            'tag' => $new_tag,
+        ]);
+        $id_tag = $tag->id;
+        $jeu = Jeu::find($id_jeu);
+        $jeu->tags()->attach($id_tag);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
