@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Models\Jeu;
+use App\Models\Tag;
 
 class JeuController extends Controller
 {
@@ -58,11 +60,13 @@ class JeuController extends Controller
     {
         $jeu = Jeu::find($id);
         $categorie = $jeu->categorie;
-        return view('jeux.show', [
-            'id_jeu' => $id,
-            'jeu' => $jeu,
-            'categorie' => $categorie
-        ]);
+        $tags = Tag::select('nom_tag', 'id')->join('pivot_tags', 'tag_id', '=', 'tags.id')->where('jeu_id', '=', $id)->get();
+        // dd($tags);
+        return view('jeux.show', compact('jeu', 'categorie', 'tags')); // equivalent des lignes en dessous
+        // [
+        //     'jeu' => $jeu,
+        //     'categorie' => $categorie
+        // ]
     }
 
 
@@ -76,9 +80,12 @@ class JeuController extends Controller
     public function edit($id)
     {
         $jeu = Jeu::find($id);
+        $categories = Categorie::all();
+        $tags = Tag::select('nom_tag', 'id')->join('pivot_tags', 'tag_id', '=', 'tags.id')->where('jeu_id', '=', $id)->get();
         return view('jeux.edit', [
-            'id_jeu' => $id,
-            'jeu' => $jeu
+            'jeu' => $jeu,
+            'categorie' => $categories,
+            'tags' => $tags
         ]);
     }
 
@@ -94,9 +101,11 @@ class JeuController extends Controller
         if ($request->validate([
             'titre' => 'required|string|max:45'
         ])) {
-            $titre = $request->input('titre');
-            $jeu = Jeu::find($id);
-            $jeu->titre = $titre;
+            $titre = $request->input('titre');  // input obligatoire
+            $jeu = Jeu::find($id);              // récupère toutes les infos de la table jeu
+            $jeu->titre = $titre;               // change le titre du jeu en lui assignant la valeur de la variable $titre (l'input)
+            $categorie_id = $request->input('categorie');   // même principe
+            $jeu->categorie_id = $categorie_id;
             $jeu->save();
             return redirect()->route('jeux.index');
         } else {

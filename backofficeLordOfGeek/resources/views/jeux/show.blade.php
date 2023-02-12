@@ -9,9 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2 class="text-2xl font-bold">{{$jeu->titre}}</h2>
-                    <p>{{$categorie->nom_cat}}</p>
-                    <br>
+                    <h2 class="text-2xl font-bold mb-3">{{$jeu->titre}}</h2>
+                    <a href=" {{route('categories.show', $categorie->id)}}" class="mt-3 w-fit p-1.5 rounded-md bg-green-200 text-sm">{{$categorie->nom_cat}}</a>
+
+                    @foreach ($tags as $tag)
+                    <a href="{{route('tags.show', $tag->id)}}" class="mx-1 mt-3 w-fit p-1.5 rounded-md bg-orange-200 text-sm">
+                        {{$tag->nom_tag}}
+                    </a>
+                    @endforeach
+
                     <div class="flex justify-end">
                         <x-buttons.modify :route="route('jeux.edit',$jeu->id)" />
                         <x-buttons.delete :action="route('jeux.destroy',$jeu->id)" />

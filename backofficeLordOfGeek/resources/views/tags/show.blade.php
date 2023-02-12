@@ -11,6 +11,12 @@
                 <div class="p-6 text-gray-900">
                     <h2 class="text-2xl font-bold">{{$tag->nom_tag}}</h2>
                     <br>
+                    <legend class="text-xl text-gray-400">Liste des jeux avec ce tag</legend>
+                    <ul>
+                        @foreach ($jeux as $jeu)
+                        <li>- <a href="{{route('jeux.show', $jeu->id)}}">{{$jeu->titre}}</a></li>
+                        @endforeach
+                    </ul>
                     <div class="flex justify-end">
                         <x-buttons.modify :route="route('tags.edit',$tag->id)" />
                         <x-buttons.delete :action="route('tags.destroy',$tag->id)" />

@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
         Jeu::factory(10)->create();
         User::factory(10)->create();
         Tag::factory(50)->create();
+        $jeux = Jeu::all();
+        foreach ($jeux as $jeu) {
+            $jeu->tags()->attach('1'); //attach pour ajouter, detach pour enlever - ne pas oublier les () après tags
+        }
     }
 }

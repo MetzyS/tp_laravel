@@ -19,4 +19,9 @@ class Jeu extends Model
     {
         return $this->belongsTo(Categorie::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'pivot_tags')->withPivot('tag_id'); // belongsToMany = many to many, 'pivot_tags' = nom de la table
+    }
 };

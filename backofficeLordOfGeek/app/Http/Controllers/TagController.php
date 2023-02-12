@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jeu;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,11 @@ class TagController extends Controller
     public function show($id)
     {
         $tag = Tag::find($id);
+        $jeux = Jeu::select('titre', 'id')->join('pivot_tags', 'jeu_id', '=', 'jeux.id')->where('tag_id', '=', $id)->get();
         return view('tags.show', [
             'id_tag' => $id,
-            'tag' => $tag
+            'tag' => $tag,
+            'jeux' => $jeux
         ]);
     }
 
@@ -68,7 +71,7 @@ class TagController extends Controller
         $tag = Tag::find($id);
         return view('tags.edit', [
             'id_tag' => $id,
-            'tag' => $tag
+            'tag' => $tag,
         ]);
     }
 

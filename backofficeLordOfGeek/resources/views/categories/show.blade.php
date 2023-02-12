@@ -11,6 +11,11 @@
                 <div class="p-6 text-gray-900">
                     <h2 class="text-2xl font-bold">{{$categorie->nom_cat}}</h2>
                     <br>
+                    <ul><span class="text-gray-400">Liste de tous les jeux de cette catégorie</span>
+                        @foreach ($jeux as $jeu)
+                        <li class="text-sm">- {{$jeu->titre}}</li>
+                        @endforeach
+                    </ul>
                     <div class="flex justify-end">
                         <x-buttons.modify :route="route('categories.edit',$categorie->id)" />
                         <x-buttons.delete :action="route('categories.destroy',$categorie->id)" />

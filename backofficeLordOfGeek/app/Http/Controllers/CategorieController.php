@@ -48,10 +48,12 @@ class CategorieController extends Controller
     public function show($id)
     {
         $categorie = Categorie::find($id);
-        return view('categories.show', [
-            'id_categorie' => $id,
-            'categorie' => $categorie
-        ]);
+        $jeux = $categorie->jeux; // voir modèle Catégorie fonction jeux()
+        return view('categories.show', compact('categorie', 'jeux'));
+        // [
+        //     'id_categorie' => $id,
+        //     'categorie' => $categorie
+        // ]
     }
 
     /**
