@@ -34,7 +34,7 @@
                             <legend class="text-slate-800 font-bold my-5">Liste des tags:</legend>
                             <ul class="my-5">
                                 @foreach ($tags as $tag)
-                                <span class="bg-orange-200 p-2 rounded w-fit">{{$tag->nom_tag}}</span>
+                                <li class="bg-orange-200 p-2 rounded w-fit inline">{{$tag->nom_tag}}</li>
                                 @endforeach
                             </ul>
                             <label for="tags" class="text-slate-800 font-bold my-5">Nouveau Tag:</label>
